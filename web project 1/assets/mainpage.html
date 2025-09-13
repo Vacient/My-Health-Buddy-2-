@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBuddy</title>
+    <link rel="stylesheet" href="/web project 1/assets/mainpage.css">
+    <script src="/web project 1/assets/mainpage.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="title">HealthBuddy</div>
+        <div class="nav">
+            <button id="darkmode-toggle">🌙 Dark Mode</button>
+            <button id="summary-btn">📊 Site Summary</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Welcome to HealthBuddy</h1>
+        <h5>Customized and Reliable Health Care Right at your Home</h5>
+        <p>Health Buddy is a website dedicated to raising awareness about your physical and mental well being.</p>
+    </div>
+
+    <div class="widgets">
+        <div>
+            <h3>Reminder</h3>
+            <p id="reminder-text"></p>
+            <button onclick="MyHealthBuddy.changeReminder()">Next Reminder</button>
+        </div>
+        <div>
+            <h3>Tip of the Day</h3>
+            <p id="tip-text"></p>
+            <button onclick="MyHealthBuddy.showTip()">New Tip</button>
+        </div>
+        <div>
+            <h3>Quote</h3>
+            <p id="quote-text"></p>
+            <button onclick="MyHealthBuddy.showQuote()">New Quote</button>
+        </div>
+    </div>
+
+    <div class="mood-section">
+        <h3>How are you feeling?</h3>
+        <select id="mood-select" onchange="MyHealthBuddy.showMoodMessage()">
+            <option value="happy">Happy</option>
+            <option value="sad">Sad</option>
+            <option value="angry">Angry</option>
+            <option value="calm">Calm</option>
+        </select>
+        <button onclick="MyHealthBuddy.logMood()">Log Mood</button>
+        <button onclick="MyHealthBuddy.moodSummary()">Mood Summary</button>
+        <p id="mood-message"></p>
+        <ul id="mood-log"></ul>
+    </div>
+
+    <div class="breathing-section">
+        <h3>Breathing Exercise</h3>
+        <div id="breathing-circle"></div>
+        <p id="breathing-timer"></p>
+        <button onclick="MyHealthBuddy.breathingCountdown()">Start Exercise</button>
+    </div>
+
+    <div class="sleep-section">
+        <h3>Sleep Calculator</h3>
+        <label>Bedtime: <input type="time" id="bedtime"></label>
+        <label>Hours to Sleep: <input type="number" id="sleep-hours" placeholder="7"></label>
+        <button onclick="MyHealthBuddy.calculateWakeTime()">Calculate Wake Time</button>
+        <p id="wake-time"></p>
+    </div>
+
+    <div class="challenge-section">
+        <h3>Challenge</h3>
+        <p id="challenge-text"></p>
+        <button onclick="MyHealthBuddy.showChallenge()">Next Challenge</button>
+    </div>
+
+    <div class="chatbot-section">
+        <button id="chatbot-toggle">Toggle Chatbot</button>
+        <div id="chatbot-container">
+            <div id="chatbot-messages"></div>
+            <input id="chatbot-input" placeholder="Ask HealthBuddy something.....(drink,eat,study)">
+            <button id="chatbot-send">Send</button>
+        </div>
+    </div>
+
+    <div class="gratitude-section">
+        <h3>Gratitude Journal</h3>
+        <input id="gratitude-input" placeholder="What are you grateful for?">
+        <button onclick="MyHealthBuddy.addGratitude()">Add</button>
+        <ul id="gratitude-log"></ul>
+    </div>
+
+    <div class="activity-section">
+        <h3>Daily Activity Tracker</h3>
+        <button onclick="MyHealthBuddy.logActivity()">Completed an Activity</button>
+        <p id="activity-log">Activities done today: 0</p>
+    </div>
+
+    <div class="mini-exercise-section">
+        <h3>Mini Exercise</h3>
+        <button onclick="MyHealthBuddy.randomExerciseReminder()">Show Exercise</button>
+    </div>
+
+    <div class="music-section">
+        <button onclick="MyHealthBuddy.suggestMusic()">Music Suggestion</button>
+    </div>
+
+    <div class="quiz-section">
+        <button onclick="MyHealthBuddy.dailyQuiz()">Daily Brain Teaser</button>
+    </div>
+
+    <div class="reset-section">
+        <button onclick="MyHealthBuddy.resetAll()">Reset All Data</button>
+    </div>
+
+    <div id="summary-modal">
+        <div id="summary-content">
+            <span class="close" id="close-summary">&times;</span>
+            <h2>Site Summary</h2>
+            <div id="summary-body"></div>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>

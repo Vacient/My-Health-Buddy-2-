@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+
+  <title>My Health Buddy</title>
+  <link rel="stylesheet" href="healthbuddy.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#team">Meet the Team</a>
+      </nav>
+    </div>
+    <div class="right">
+      <nav class="nav">
+        <a href="indexLoginForm.html">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="hero-text animate-on-scroll">
+      <h4>Welcome to HealthBuddy</h4>
+      <h1>Customized and Reliable Health Care Right at your Home</h1>
+      <p>Health Buddy is a website dedicated to raising awareness about your physical and mental well being. We hope to
+        reduce your mental unwellness even if it is by a small amount.</p>
+    </div>
+    <div class="dummy"></div>
+  </section>
+
+  <!-- Services / Cards -->
+  <section class="container-1" id="services">
+    <div class="main animate-on-scroll">
+      <h1>Discover Your True Calling.</h1>
+      <h1>What we can offer :</h1>
+    </div>
+    <div class="cards">
+      <div class="mirror animate-on-scroll">
+        <img src="assets/Images/writing.webp" class="icons">
+        
+        <h1 class="cardM">Your <br>Personal Diary</h1>
+        <p>Record Your Everyday moments with us. Every achievement counts. You are more than you let yourself be.</p>
+      </div>
+      <div class="mirror animate-on-scroll">
+        <img src="assets/Images/breathing_1.webp" class="icons">
+        <h1 class="cardM">Breathing <br>Exercises</h1>
+        <p>Feel magical effects of different breathing techniques. Refresh your mind with less than 5 minutes.</p>
+      </div>
+      <div class="mirror animate-on-scroll">
+        <img src="assets//Images/robot-assistant.webp" class="icons">
+        <h1 class="cardM">Chat with <br>HappyBot</h1>
+        <p>Try out chatting with our HappyBot! A good communication partner goes a long way.</p>
+      </div>
+      <div class="mirror animate-on-scroll">
+        <img src="assets/Images/brainboot.webp" class="icons">
+        <h1 class="cardM">Brain <br>Rebooting Quizzes</h1>
+        <p>Ever felt brain-ain't-braining moments? Reboot your brain with thinking-based quizzes!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section-header" id="team">
+    <h2>Meet the Team</h2>
+    <p>Our dedicated team is here to support your health journey.</p>
+  </section>
+  <div class="team-cards">
+    <div class="team-member animate-on-scroll">
+      <img src="assets/Images/prototype.png" alt="Team Member 1">
+      <h4>Dr. Ayesha Khan</h4>
+      <p>Lead Psychologist</p>
+      <p>Expert in mental health and wellness.</p>
+    </div>
+    <div class="team-member animate-on-scroll">
+      <img src="assets/Images/robot-assistant.webp" alt="Team Member 2">
+      <h4>Samir Patel</h4>
+      <p>Fitness Coach</p>
+      <p>Specialist in physical activity and motivation.</p>
+    </div>
+    <div class="team-member animate-on-scroll">
+      <img src="assets/Images/brainboot.webp" alt="Team Member 3">
+      <h4>Fatima Noor</h4>
+      <p>Nutritionist</p>
+      <p>Focuses on healthy eating habits.</p>
+    </div>
+  </div>
+
+  <!-- User Testimonials -->
+  <section class="user-voices">
+    <div class="section-header animate-on-scroll">
+      <h2>What Our Users Say</h2>
+      <p>Real experiences from HealthBuddy users.</p>
+    </div>
+    <div class="testimonials">
+      <div class="quote-card animate-on-scroll">
+        <p>"HealthBuddy helps me start my day calm and focused."</p>
+        <h4>- A. Smith</h4>
+      </div>
+      <div class="quote-card animate-on-scroll">
+        <p>"The personal diary feature keeps me motivated every day."</p>
+        <h4>- J. Lee</h4>
+      </div>
+      <div class="quote-card animate-on-scroll">
+        <p>"I love the breathing exercises, only 5 minutes to refresh."</p>
+        <h4>- M. Patel</h4>
+      </div>
+      <div class="quote-card animate-on-scroll">
+        <p>"HappyBot is so snarky! She is a reference to Madam Herta, right?"</p>
+        <h4>- S. Khan</h4>
+      </div>
+      <div class="quote-card animate-on-scroll">
+        <p>"Brain quizzes are surprisingly engaging and help me stay sharp."</p>
+        <h4>- L. Nguyen</h4>
+      </div>
+      <div class="quote-card animate-on-scroll">
+        <p>"The HealthBuddy interface is easy to use and visually appealing."</p>
+        <h4>- R. Johnson</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment Section -->
+  <section class="section-header animate-on-scroll" style="margin-top:40px;">
+    <h2>Share Your Thoughts</h2>
+    <p>We value your feedback! Leave a comment below.</p>
+  </section>
+  <div class="comment-section animate-on-scroll">
+    <h3>Leave a Comment</h3>
+    <form id="commentForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <textarea id="comment" rows="4" placeholder="Your Comment" required></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+    <div id="commentsList"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="site-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h2>HealthBuddy</h2>
+      </div>
+      <div class="footer-sections">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Email: support@healthbuddy.com</p>
+          <p>Phone: +95 123 456 789</p>
+          <p>Address: UIT Campus, Myanmar</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><img src="assets/Images/facebook icon.png" alt="Facebook"></a>
+            <a href="#"><img src="assets/Images/social-media-logo-design (1)/10462330.png"
+                alt="LinkedIn"></a>
+            <a href="#"><img src="assets/Images/social-media-logo-design/10462345.png"
+                alt="Instragram"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 HealthBuddy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="healthbuddy.js"></script>
+</body>
+
+</html>

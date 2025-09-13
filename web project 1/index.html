@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Health Buddy</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600|Quicksand:500&display=swap"
+        rel="stylesheet" />
+
+    <!-- IntlTelInput CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+    <div class="wrapper">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo" onclick="location.href='healthbuddy.html'">HealthBuddy</div>
+            </div>
+
+            <nav class="header-nav" id="navi-menu">
+                <ul id="navi-list">
+                    <li><a href="healthbuddy.html">🏠 Home</a></li>
+                    <li><a href="health_warning.html">⚠️ Health Warning</a></li>
+                    <li class="dropdown">
+                        <!-- Profile Modal -->
+                        <div id="profile-modal" class="profile-modal">
+                            <div class="profile-modal-content">
+                                <span class="close" id="close-profile">&times;</span>
+                                <h2>Your Profile</h2>
+                                <form id="profile-form">
+                                    <label for="profile-name">Full Name</label>
+                                    <input type="text" id="profile-name" placeholder="Enter your name" maxlength="30" required />
+
+                                    <label for="profile-email">Email</label>
+                                    <input type="email" id="profile-email" placeholder="Enter your email" disabled />
+
+                                    <label for="profile-phone">Phone</label>
+                                    <input type="tel" id="profile-phone" placeholder="Enter your phone" maxlength="15" pattern="[0-9]+" required />
+
+                                    <label for="profile-age">Age</label>
+                                    <input type="number" id="profile-age" placeholder="Enter your age" min="5" max="120" required />
+
+                                    <label for="profile-gender">Gender</label>
+                                    <select id="profile-gender" required>
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+
+                                    <button type="button" id="save-profile">Save Profile</button>
+                                    <p id="profile-saved-msg" class="saved-msg">Profile saved!</p>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Trigger Button -->
+                        <button id="profile-btn" class="neon-btn">🧑 Profile</button>
+                    </li>
+                    <li class="dropdown">
+                        <button class="dropbtn">⚙️ Settings <span class="arrow">▼</span></button>
+                        <div class="dropdown-content">
+                            <button id="darkmode-toggle">🌙 Night Mode</button>
+                            <button id="summary-btn">📊 Site Summary</button>
+                            <button id="reset-btn">🔄 Reset Data</button>
+                            <button id="logbook-btn">📖 Log Book</button>
+                        </div>
+                    </li>
+                    <li><button id="logout-btn">🚪 Logout</button></li>
+                </ul>
+
+                <button id="navi-toggle" class="hamburger">☰</button>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main container" id="main">
+            <section class="welcome-section flex">
+                <div class="content">
+                    <h1>Welcome to HealthBuddy's Playground</h1>
+                    <h5>Make yourself at home.</h5>
+                    <p>Try out your various services as well as our constantly updating chatbox.</p>
+                </div>
+                <div class="main-img">
+                    <img src="assets/Images/44073.webp" alt="HealthBuddy Logo" />
+                </div>
+            </section>
+
+            <div class="widgets" id="widgets">
+                <div class="widget-card" id="widget-reminder">
+                    <h3>⏰ Reminder</h3>
+                    <p class="section-intro">Stay on track with healthy habits! Click below for a new reminder.</p>
+                    <button onclick="MyHealthBuddy.changeReminder()">Next Reminder</button>
+                </div>
+
+                <div class="widget-card" id="widget-tip">
+                    <h3>💡 Tip of the Day</h3>
+                    <p class="section-intro">Get a daily wellness tip to boost your health and productivity.</p>
+                    <button onclick="MyHealthBuddy.showTip()">New Tip</button>
+                </div>
+
+                <div class="widget-card" id="widget-quote">
+                    <h3>💬 Quote</h3>
+                    <p class="section-intro">Find inspiration and motivation with a new quote each day.</p>
+                    <button onclick="MyHealthBuddy.showQuote()">New Quote</button>
+                </div>
+            </div>
+
+            <!-- Brain Teaser Section -->
+            <section class="brain-teaser-section" id="brain-teaser-section">
+                <div class="challenge-section">
+                    <h3>Challenge</h3>
+                    <p class="section-intro">Sharpen your mind with a fun challenge. Try a new one every day!</p>
+                    <button onclick="MyHealthBuddy.showChallenge()">Next Challenge</button>
+                </div>
+                <div class="mini-exercise-section">
+                    <h3>Mini Exercise</h3>
+                    <p class="section-intro">Quick exercises to keep you active and energized throughout your day.</p>
+                    <button onclick="MyHealthBuddy.showExerciseModal()">Show Exercise</button>
+                </div>
+                <div class="music-section">
+                    <h3>Music Suggestion</h3>
+                    <p class="section-intro">Music can boost your mood and focus. Get a suggestion for today!</p>
+                    <button onclick="MyHealthBuddy.showMusicModal()">🎵 Suggest Music</button>
+                </div>
+                <div class="quiz-section">
+                    <h3>Daily Quiz</h3>
+                    <p class="section-intro">Test your brain with our daily quiz. Ready for a challenge?</p>
+                    <button onclick="MyHealthBuddy.showQuizModal()">Daily Brain Teaser 🧠</button>
+                </div>
+                <div class="breathing-section">
+                    <h3>Breathing Exercise</h3>
+                    <p class="section-intro">Relax and focus with a 30-second breathing exercise.</p>
+                    <button id="start-breathing-btn">Start</button>
+                    <button id="stop-breathing-btn" disabled>Stop</button>
+                    <p id="breathing-timer">00:30</p>
+                    <div class="breathing-circle stopped" id="breathing-circle"></div>
+                </div>
+            </section>
+
+            <div class="journal-section" id="journal-section">
+                                           <div class="journal-toggle-bar">
+                        <button id="journal-toggle" class="journal-toggle-btn">📁 Open/Close Journal</button>
+                    </div>
+                    <div class="file-holder">
+                        <div class="journal-container closed">
+                            <div class="journal-card mood-section">
+                                <h3>😊 Mood Tracker</h3>
+                                <select id="mood-select" onchange="MyHealthBuddy.showMoodMessage()">
+                                    <option value="happy">Happy</option>
+                                    <option value="sad">Sad</option>
+                                    <option value="angry">Angry</option>
+                                    <option value="calm">Calm</option>
+                                </select>
+                                <button onclick="MyHealthBuddy.logMood()">Log Mood</button>
+                                <button onclick="MyHealthBuddy.moodSummary()">Mood Summary</button>
+                                <p id="mood-message"></p>
+                                <ul id="mood-log"></ul>
+                            </div>
+                            <div class="journal-card gratitude-section">
+                                <h3>🙏 Gratitude Journal</h3>
+                                <input id="gratitude-input" placeholder="What are you grateful for?" />
+                                <button onclick="MyHealthBuddy.addGratitude()">Add</button>
+                                <ul id="gratitude-log"></ul>
+                            </div>
+                            <div class="journal-card activity-section">
+                                <h3>🏃 Activity Tracker</h3>
+                                <button onclick="MyHealthBuddy.logActivity()">Completed an Activity</button>
+                                <p id="activity-log">Activities done today: 0</p>
+                            </div>
+                            <div class="journal-card diary-section">
+                                <h3>📔 Daily Diary</h3>
+                                <textarea id="diary-input" placeholder="What did you achieve or experience today?"></textarea>
+                                <button onclick="MyHealthBuddy.addDiaryEntry()">Add Entry</button>
+                                <ul id="diary-log"></ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- Chatbot Toggle Button -->
+           
+
+        
+
+        </main>
+            <!-- Chatbot Container -->
+            <div id="chatbot-container" class="chatbot">
+                <div id="chatbot-header">
+                    <span>HealthBuddy Chat</span>
+                    <button id="chatbot-close">✖</button>
+                </div>
+                <div id="chatbot-messages" class="chatbot-messages"></div>
+                <div class="chatbot-input-container">
+                    <input type="text" id="chatbot-input" placeholder="Type your message...">
+                    <button id="chatbot-send">Send</button>
+                </div>
+            </div>
+ <button id="chatbot-toggle">💬 Chat</button>
+        <!-- Footer -->
+        <footer class="site-footer" id="site-footer">
+            <div class="footer-content container">
+                <div class="footer-logo">
+                    <h2>HealthBuddy</h2>
+                </div>
+                <div class="footer-sections">
+                    <div class="footer-section">
+                        <h3>Contact Us</h3>
+                        <p>Email: support@healthbuddy.com</p>
+                        <p>Phone: +95 123 456 789</p>
+                        <p>Address: UIT Campus, Myanmar</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="#"><img src="assets/Images/facebook icon.png" alt="Facebook" /></a>
+                            <a href="#"><img src="assets/Images/social-media-logo-design/10462345.png"
+                                    alt="Instagram" /></a>
+                            <a href="#"><img src="assets/Images/social-media-logo-design (1)/10462330.png"
+                                    alt="LinkedIn" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HealthBuddy. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Summary Modal -->
+        <div id="summary-modal" class="modal">
+            <div id="summary-content" class="modal-content">
+                <span class="close" id="close-summary">&times;</span>
+                <h2>Site Summary</h2>
+                <div id="summary-body"></div>
+            </div>
+        </div>
+
+        <!-- Logbook Modal -->
+        <div id="logbook-modal" class="logbook-modal">
+            <div class="logbook-book">
+                <span class="close-logbook" id="close-logbook">&times;</span>
+                <h2 class="logbook-title">Your Log File</h2>
+                <div class="logbook-bookmarks">
+                    <button class="bookmark-btn active" data-type="all">All Logs</button>
+                    <button class="bookmark-btn" data-type="mood">Mood Log</button>
+                    <button class="bookmark-btn" data-type="gratitude">Gratitude</button>
+                    <button class="bookmark-btn" data-type="activity">Activity</button>
+                    <button class="bookmark-btn" data-type="diary">Diary</button>
+                </div>
+                <div class="logbook-content" id="logbook-content"></div>
+            </div>
+        </div>
+
+        <!-- Modal for Reminders, Tips, Quotes, Challenges -->
+        <div id="info-modal" class="modal">
+            <div class="modal-content small-modal-content">
+                <span class="close" id="close-info-modal">&times;</span>
+                <p id="info-modal-text"></p>
+            </div>
+        </div>
+
+        <!-- Modal for Exercise -->
+        <div id="exercise-modal" class="modal">
+            <div class="modal-content small-modal-content">
+                <span class="close" id="close-exercise-modal">&times;</span>
+                <p id="exercise-modal-text"></p>
+            </div>
+        </div>
+
+        <!-- Modal for Music -->
+        <div id="music-modal" class="modal">
+            <div class="modal-content small-modal-content">
+                <span class="close" id="close-music-modal">&times;</span>
+                <p id="music-modal-text"></p>
+            </div>
+        </div>
+
+        <!-- Modal for Quiz -->
+        <div id="quiz-modal" class="modal">
+            <div class="modal-content quiz-modal-content">
+                <span class="close" id="close-quiz-modal">&times;</span>
+                <h2>Daily Brain Teaser 🧠</h2>
+                <div id="quiz-question-container"></div>
+                <div id="quiz-controls">
+                    <button id="quiz-next-btn">Next</button>
+                    <button id="quiz-finish-btn" style="display:none;">Finish</button>
+                </div>
+                <p id="quiz-feedback"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script -->
+    <script src="script.js" defer></script>
+</body>
+
+
+</html>

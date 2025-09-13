@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+
+  <title>My Health Buddy</title>
+  <meta name="description"
+    content="Clear, actionable warnings and resources about mental and physical health. If you are in immediate danger, call your local emergency number." />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600|Quicksand:500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="health_warning.css">
+  <script type="text/javascript" src="health_warning.js" defer></script>
+</head>
+
+<body>
+  <!-- Navigation Header -->
+  <header class="header">
+    <div class="title" onclick="location.href='healthbuddy.html'">HealthBuddy</div>
+    <nav class="header-right">
+      <a href="health_warning.html" class="active">⚠️ Health Warnings</a>
+      <a href="healthbuddy.html">🏠 Home</a>
+      <a href="index.html">◀️ Back</a>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="logo">
+        <div class="badge">ALERT</div>
+        <div>
+          <h1>Health & Safety Alert — Mental & Physical Health</h1>
+          <p class="lead">Clear warning signs, practical steps you can take right now, and trusted resources. If you are
+            in immediate danger, call local emergency services.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="grid">
+      <!-- Left Section -->
+      <section>
+        <!-- Immediate Warning Signs Card -->
+        <article class="card hero-card">
+          <div class="hero">
+            <div class="art">
+              <img
+              src="healthalert4.png"
+                alt="Concerned person looking down, supportive friend placing a hand on shoulder" />
+            </div>
+            <div class="hero-content">
+              <h2 id="title-warning">Immediate warning signs</h2>
+              <p><strong>Mental health:</strong> feeling hopeless, thinking about self-harm, extreme mood changes,
+                talking about death. Treat these as urgent.</p>
+              <p><strong>Physical health:</strong> chest pain, difficulty breathing, sudden numbness/weakness, severe
+                bleeding, loss of consciousness — seek emergency care.</p>
+              <div class="hero-buttons">
+                <a class="btn btn-primary" href="#resources">Get help now</a>
+                <button class="btn btn-outline no-print" onclick="openModal()">Printable checklist</button>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <hr />
+
+          <h2>What to do in the next 30 minutes</h2>
+          <ul>
+            <li>Find a safe, calm space. If unsafe at home, go to a public place or call emergency services.</li>
+            <li>Tell someone you trust exactly how you feel — call or message them now.</li>
+            <li>Follow your support plan, or use the resources panel or a crisis line immediately.</li>
+            <li>For physical emergencies (chest pain, severe bleeding), call emergency number at once.</li>
+          </ul>
+
+          <div class="warning" role="alert">
+            <strong>Warning:</strong> If you are thinking about harming yourself or others, or you are in immediate
+            danger, contact emergency services right now.
+          </div>
+
+          <hr />
+
+          <h2>Safety steps you can take</h2>
+          <div class="small-grid">
+            <div>
+              <h3>For mental distress</h3>
+              <ul>
+                <li>Delay — give yourself 10 minutes and do a grounding exercise (5 things you see, 4 you touch, 3 you
+                  hear).</li>
+                <li>Remove immediate means (medication, sharp objects) if safe.</li>
+                <li>Use breathing: 4s inhale — 4s hold — 6s exhale for 2–3 minutes.</li>
+                <li>Contact a trusted friend, family member, or crisis line.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>For physical emergency</h3>
+              <ul>
+                <li>Call emergency services immediately for life-threatening signs.</li>
+                <li>If trained, provide basic first aid (CPR, stop bleeding).</li>
+                <li>Keep the person warm and monitored; do not give anything by mouth if unconscious.</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr />
+
+          <h2>When to seek professional help</h2>
+          <p>See a mental health professional if you notice persistent sadness, loss of interest in daily life, severe
+            anxiety, changes in sleep/appetite, or thoughts of self-harm. For severe unexplained physical symptoms, see
+            a medical professional.</p>
+        </article>
+
+        <!-- Quick Safety Plan Card -->
+        <article class="card">
+          <h2>Prepare a quick safety plan</h2>
+          <ol>
+            <li>Name three people you can call: Person 1, Person 2, Person 3.</li>
+            <li>List coping strategies: breathe, walk, music, grounding, distraction tasks.</li>
+            <li>Write emergency contacts and your local emergency number somewhere visible.</li>
+          </ol>
+          <button class="btn btn-primary no-print" onclick="downloadChecklist()">Download checklist (PDF)</button>
+        </article>
+
+        <!-- Impostor Syndrome Card -->
+        <div class="card imposter-section">
+          <h2>Impostor Syndrome Self-Check</h2>
+          <p>Answer honestly. This is not a medical test, just a reflection tool.</p>
+          <form id="imposterForm">
+            <label><input type="checkbox" name="q1"> Do you often feel your success is just luck, not
+              skill?</label><br><br>
+            <label><input type="checkbox" name="q2"> Do you fear others will “find out” you are less capable than they
+              think?</label><br><br>
+            <label><input type="checkbox" name="q3"> Do you downplay your achievements even when
+              praised?</label><br><br>
+            <label><input type="checkbox" name="q4"> Do you compare yourself to classmates or coworkers and feel
+              inadequate?</label><br><br>
+            <button type="button" onclick="checkImposter()">Check Results</button>
+          </form>
+          <div id="imposterResult"></div>
+        </div>
+        <div id="imposterResources" style="display:none;">
+          <div class="result-box">
+            <h3>You may be experiencing Impostor Syndrome</h3>
+            <p>Many IT students and professionals feel the same way—it does <b>not</b> mean you don’t belong. Here are
+              some resources:</p>
+            <ul class="help-links"
+              style="list-style-type: disc; padding-left: 20px; text-decoration: underline; color:#0654d0">
+              <li><a href="https://impostorsyndrome.com/resources/" target="_blank">Impostor Syndrome Institute</a></li>
+              <li><a href="https://www.st-andrews.ac.uk/guides/students-managing-imposter-syndrome/" target="_blank">St
+                  Andrews Student Guide</a></li>
+              <li><a href="https://orise.orau.gov/internships-fellowships/blog/imposter-syndrome.html"
+                  target="_blank">ORISE STEM Blog</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Sidebar -->
+      <aside>
+        <!-- Resources Card -->
+        <div class="card" id="resources">
+          <h2>Resources & Hotlines</h2>
+          <p class="lead">If you're not in immediate danger but need help, try these options.</p>
+          <div class="resources">
+            <div class="resource">
+              <div class="ico" aria-hidden="true">📞</div>
+              <div>
+                <strong>Emergency / Local services</strong>
+                <p>Call your local emergency number immediately for life-threatening emergencies.</p>
+              </div>
+            </div>
+            <div class="resource">
+              <div class="ico">💬</div>
+              <div>
+                <strong>Suicide & Crisis Lines</strong>
+                <p>Search for "crisis line" + your country if unsure.</p>
+              </div>
+            </div>
+            <div class="resource">
+              <div class="ico">🏥</div>
+              <div>
+                <strong>Medical Care</strong>
+                <p>For severe physical symptoms, visit the nearest emergency department.</p>
+              </div>
+            </div>
+            <div class="resource">
+              <div class="ico">🌐</div>
+              <div>
+                <strong>Online Support & Therapy</strong>
+                <p>Many countries offer telehealth or chat-based support. Look for licensed providers.</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="alert('Share/Print page via Ctrl/Cmd+P')">Share / Print</button>
+        </div>
+
+        <!-- Quick Mental Health Check -->
+        <div class="card">
+          <h2>Quick Mental Health Check (2 min)</h2>
+          <form id="quick-check" onsubmit="return runCheck(event)">
+            <label>1. Thoughts of self-harm in the past month?</label>
+            <select id="q1" required>
+              <option value="">Select</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+
+            <label>2. Severe trouble with daily tasks?</label>
+            <select id="q2" required>
+              <option value="">Select</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+
+            <div class="form-buttons">
+              <button type="submit" class="btn btn-primary">Get recommendation</button>
+              <button type="button" class="btn btn-outline" onclick="resetCheck()">Reset</button>
+            </div>
+            <div id="result" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <!-- Daily Motivation -->
+        <div class="card">
+          <h2>Daily Motivation</h2>
+          <blockquote>"Every day may not be good, but there is something good in every day."</blockquote>
+          <hr>
+          <h3>Inspiration Quote</h3>
+          <blockquote>"You are stronger than you think, and braver than you feel."</blockquote>
+          <hr>
+          <h3>Need Support?</h3>
+          <p>Email: support@healthbuddy.com</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>HealthBuddy</h2>
+        </div>
+        <div class="footer-sections">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: support@healthbuddy.com</p>
+            <p>Phone: +95 123 456 789</p>
+            <p>Address: UIT Campus, Myanmar</p>
+          </div>
+          <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="assets/Images/facebook icon.png" alt="Facebook" style="filter: invert(1);"></a>
+                <a href="#"><img src="assets/Images/social-media-logo-design/10462345.png" alt="Instagram" style="filter: invert(1);"></a>
+                <a href="#"><img src="assets/Images/social-media-logo-design (1)/10462330.png" alt="LinkedIn" style="filter: invert(1);"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 HealthBuddy. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Printable Modal -->
+  <div class="modal-backdrop" id="modal">
+    <div class="card modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">Printable Safety Checklist</h2>
+      <ul>
+        <li>Emergency number: __________________</li>
+        <li>Three support people: _________________</li>
+        <li>Medication & important notes: _________</li>
+        <li>Two coping strategies: _____________</li>
+        <li>Nearest emergency department: ________</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
+        <button class="btn btn-primary" onclick="window.print()">Print checklist</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Help Now Button -->
+  <div class="help-now-wrapper">
+    <button class="help-now-btn">⚠️ Help Now</button>
+    <div class="help-actions">
+      <a href="tel:+95912345678" class="action-btn">📞 Call</a>
+      <a href="https://medical.chat-data.com/" class="action-btn">💬 Chat</a>
+      <a href="https://www.who.int/publications/who-guidelines" class="action-btn">🩺 Resources</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

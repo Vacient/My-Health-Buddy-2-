@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Health Buddy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 0;
+      background: linear-gradient(135deg, #0a6078, #1abc9c);
+      overflow-y: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    body::-webkit-scrollbar {
+      width: 0;
+      background: transparent;
+    }
+
+    /* Bubble Background */
+    .bubble-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bubble-bg div {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(26, 188, 156, 0.2);
+      bottom: -100px;
+      animation: floatUp linear infinite;
+      filter: blur(8px);
+      box-shadow: 0 0 25px rgba(26, 188, 156, 0.5);
+      mix-blend-mode: screen;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Form Container */
+    .container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+      width: 380px;
+      text-align: center;
+      z-index: 10;
+      animation: fadeIn 0.7s ease-in-out;
+      max-height: 90vh;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .container::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .logo img {
+      width: 180px;
+      margin-bottom: 15px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0 25px;
+    }
+
+    .tab-buttons button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      background: #f1f1f1;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .tab-buttons button.active {
+      background: #1abc9c;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .form {
+      display: none;
+      text-align: left;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    button.submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #1abc9c;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button.submit-btn:hover {
+      background: #16a085;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 38px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .password-feedback {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .password-feedback span {
+      display: block;
+    }
+
+    .valid {
+      color: green;
+    }
+
+    .invalid {
+      color: red;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: 90%;
+        padding: 25px 20px;
+      }
+
+      .logo img {
+        width: 140px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .tab-buttons button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      input,
+      select {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bubble-bg"></div>
+
+  <main class="container">
+    <div class="logo"><img src="Image.png" alt="HealthBuddy Logo"></div>
+
+    <div class="tab-buttons">
+      <button id="signin-btn" class="active">Sign In</button>
+      <button id="signup-btn">Sign Up</button>
+    </div>
+
+    <!-- Sign In Form -->
+    <form class="form active" id="signin-form" novalidate>
+      <div class="input-group">
+        <label for="signin-identifier">Email or Phone</label>
+        <input type="text" id="signin-identifier" placeholder="Enter your email" required autofocus>
+        <div class="error" id="signin-identifier-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="signin-password">Password</label>
+        <input type="password" id="signin-password" placeholder="Enter your password" required>
+        <span class="toggle-password" data-target="signin-password" aria-label="Toggle password visibility">👁️</span>
+        <div class="error" id="signin-password-error"></div>
+      </div>
+      <button type="submit" class="submit-btn">Sign In</button>
+    </form>
+
+    <!-- Sign Up Form -->
+    <form class="form" id="signup-form" novalidate>
+      <div class="input-group">
+        <label for="name">Full Name</label>
+
+  <input type="text" id="name" placeholder="Enter your full name" required maxlength="30">
+        <div class="error" id="name-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <div class="error" id="email-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" min="5" max="100" placeholder="Enter your age" required>
+        <div class="error" id="age-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        <div class="error" id="phone-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="gender">Gender</label>
+        <select id="gender" required>
+          <option value="">-- Select Gender --</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="error" id="gender-error"></div>
+      </div>
+      <div class="input-group">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" placeholder="Create a password" required>
+        <span class="toggle-password" data-target="signup-password" aria-label="Toggle password visibility">👁️</span>
+        <div class="error" id="signup-password-error"></div>
+        <div class="password-feedback" id="password-feedback">
+          <span id="length" class="invalid">• At least 6 characters</span>
+          <span id="letters" class="invalid">• Contains a letter</span>
+          <span id="numbers" class="invalid">• Contains a number</span>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+  <script>
+    // Bubble generator
+    const bubbleBg = document.querySelector('.bubble-bg');
+    for (let i = 0; i < 20; i++) {
+      const bubble = document.createElement('div');
+      const size = Math.random() * 60 + 20;
+      bubble.style.width = bubble.style.height = size + 'px';
+      bubble.style.left = Math.random() * 100 + '%';
+      bubble.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      bubbleBg.appendChild(bubble);
+    }
+
+    // Tab switching
+    const signinBtn = document.getElementById("signin-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const signinForm = document.getElementById("signin-form");
+    const signupForm = document.getElementById("signup-form");
+
+    signinBtn.addEventListener("click", () => {
+      signinBtn.classList.add("active");
+      signupBtn.classList.remove("active");
+      signinForm.classList.add("active");
+      signupForm.classList.remove("active");
+      document.getElementById("signin-identifier").focus();
+    });
+
+    signupBtn.addEventListener("click", () => {
+      signupBtn.classList.add("active");
+      signinBtn.classList.remove("active");
+      signupForm.classList.add("active");
+      signinForm.classList.remove("active");
+      document.getElementById("name").focus();
+    });
+
+    // Phone input
+    const phoneInput = document.querySelector("#phone");
+    const iti = window.intlTelInput(phoneInput, {
+      initialCountry: "mm",
+      separateDialCode: true,
+      nationalMode: true,
+      formatOnDisplay: true,
+      preferredCountries: ["mm", "us", "in", "sg"],
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+    });
+
+    // Clean number
+    function cleanNumber(num) {
+      return num.replace(/[-\s]/g, "");
+    }
+
+    // Password feedback
+    const signupPassword = document.getElementById("signup-password");
+    const feedback = {
+      length: document.getElementById("length"),
+      letters: document.getElementById("letters"),
+      numbers: document.getElementById("numbers")
+    };
+    signupPassword.addEventListener("input", () => {
+      const val = signupPassword.value;
+      feedback.length.className = val.length >= 6 ? "valid" : "invalid";
+      feedback.letters.className = /[A-Za-z]/.test(val) ? "valid" : "invalid";
+      feedback.numbers.className = /\d/.test(val) ? "valid" : "invalid";
+    });
+
+    // Toggle password visibility
+    document.querySelectorAll(".toggle-password").forEach(icon => {
+      icon.addEventListener("click", () => {
+        const input = document.getElementById(icon.dataset.target);
+        if (input.type === "password") {
+          input.type = "text"; icon.textContent = "🙈";
+        } else {
+          input.type = "password"; icon.textContent = "👁️";
+        }
+      });
+    });
+
+    // Local storage for users
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+    function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
+
+    // Validation
+    function validateEmail(email) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email); }
+    function validatePassword(password) { return /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(password); }
+
+    // --- SIGNUP ---
+    signupForm.addEventListener("submit", e => {
+      e.preventDefault(); let valid = true;
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const gender = document.getElementById("gender").value;
+      const password = signupPassword.value.trim();
+
+      ["name", "email", "age", "phone", "gender", "signup-password"].forEach(id => {
+        document.getElementById(id + "-error").textContent = "";
+      });
+
+      // Phone handling
+      let rawPhone = cleanNumber(phoneInput.value);
+      if (/^09\d{7,9}$/.test(rawPhone)) rawPhone = "+95" + rawPhone.slice(1);
+      phoneInput.value = rawPhone;
+
+      if (name.length < 2) { document.getElementById("name-error").textContent = "Enter a valid name."; valid = false; }
+      if (!validateEmail(email)) { document.getElementById("email-error").textContent = "Enter a valid email."; valid = false; }
+      if (!age || age < 5 || age > 100) { document.getElementById("age-error").textContent = "Age must be 5-100."; valid = false; }
+      if (!iti.isValidNumber()) { document.getElementById("phone-error").textContent = "Enter a valid phone number."; valid = false; }
+      if (!gender) { document.getElementById("gender-error").textContent = "Please select a gender."; valid = false; }
+      if (!validatePassword(password)) { document.getElementById("signup-password-error").textContent = "Password must meet all requirements."; valid = false; }
+
+      if (valid) {
+        const phoneNumber = iti.getNumber(intlTelInputUtils.numberFormat.E164);
+        users[email] = { password, name, phoneNumber };
+        saveUsers();
+        alert("Sign up successful! Please sign in.");
+        signupForm.reset(); iti.setCountry("mm");
+
+        signupBtn.classList.remove("active");
+        signinBtn.classList.add("active");
+        signupForm.classList.remove("active");
+        signinForm.classList.add("active");
+        document.getElementById("signin-identifier").focus();
+      }
+    });
+
+    // --- SIGNIN ---
+    const signinIdentifier = document.getElementById("signin-identifier");
+    signinForm.addEventListener("submit", e => {
+      e.preventDefault(); let valid = true;
+
+      const identifier = signinIdentifier.value.trim();
+      const password = document.getElementById("signin-password").value.trim();
+      document.getElementById("signin-identifier-error").textContent = "";
+      document.getElementById("signin-password-error").textContent = "";
+
+      let user = null;
+
+      if (validateEmail(identifier)) {
+        if (users[identifier]) user = users[identifier];
+      } else {
+        let cleaned = cleanNumber(identifier);
+        if (/^09\d{7,9}$/.test(cleaned)) cleaned = "+95" + cleaned.slice(1);
+
+        const tempInput = document.createElement("input");
+        tempInput.type = "tel";
+        tempInput.value = cleaned;
+        const tempIti = window.intlTelInput(tempInput, {
+          initialCountry: "mm",
+          nationalMode: false,
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+        });
+
+        if (tempIti.isValidNumber()) {
+          const intlPhone = tempIti.getNumber(intlTelInputUtils.numberFormat.E164);
+          for (let email in users) {
+            if (users[email].phoneNumber === intlPhone) { user = users[email]; break; }
+          }
+        }
+      }
+
+      if (!user) {
+        document.getElementById("signin-identifier-error").textContent = "No account found. Please sign up."; valid = false;
+      } else if (user.password !== password) {
+        document.getElementById("signin-password-error").textContent = "Incorrect password."; valid = false;
+      }
+
+      // if (valid) {
+      //   localStorage.setItem("loggedInUser", identifier);
+
+      //   alert("Login successful!");
+      //   window.location.href = "/web project 1/index.html";
+      // }
+      if (valid) {
+        // ✅ Always save by email (the key in users)
+        for (let email in users) {
+          if (users[email] === user) {
+            localStorage.setItem("loggedInUser", email);
+            break;
+          }
+        }
+
+        alert("Login successful!");
+        window.location.href = "index.html";
+      }
+
+
+    });
+  </script>
+</body>
+
+</html>
